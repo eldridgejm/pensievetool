@@ -10,6 +10,7 @@ def cmd_render(args):
 
 
 def path_reader(path):
+    path = pathlib.Path(path)
     with path.open() as fileobj:
         return fileobj.read()
 
@@ -21,10 +22,9 @@ def main():
     render_parser.set_defaults(command=cmd_render)
     render_parser.add_argument("path", type=pathlib.Path, help="Path to markdown note.")
     render_parser.add_argument(
-        "template",
+        "--template",
         type=path_reader,
         default=None,
-        nargs="?",
         help="Path to HTML that will be used as the template.",
     )
 

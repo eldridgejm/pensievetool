@@ -31,4 +31,4 @@ def render(path: pathlib.Path, template=None):
         extensions=["toc", "smarty", PensieveLinkExtension()],
     )
 
-    print(TEMPLATE.format(contents=md, title=path.parent.name))
+    print(template.format(contents=md, title=path.parent.name))
