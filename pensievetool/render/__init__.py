@@ -1,6 +1,7 @@
 import markdown
 import pathlib
 from ._wikilinks import PensieveLinkExtension
+from ._headings import HeadingExtension
 
 import textwrap
 
@@ -37,6 +38,7 @@ def render(path: pathlib.Path, template=None):
             "smarty",
             "toc",
             PensieveLinkExtension(),
+            HeadingExtension()
         ],
     )
 
