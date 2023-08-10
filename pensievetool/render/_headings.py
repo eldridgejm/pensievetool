@@ -24,7 +24,7 @@ class HeadingTreeprocessor(Treeprocessor):
 
                 close = etree.Element("span")
                 close.text = ":"
-                open.set("class", "colon")
+                close.set("class", "colon")
 
                 heading.text = ""
                 heading.extend([open, title_span, close])
