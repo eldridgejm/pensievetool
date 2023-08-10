@@ -28,7 +28,7 @@ def render(path: pathlib.Path, template=None):
 
     md = markdown.markdown(
         contents,
-        extensions=["toc", "smarty", "nl2br", PensieveLinkExtension()],
+        extensions=["toc", "smarty", PensieveLinkExtension()],
     )
 
     print(template.format(contents=md, title=path.parent.name))
