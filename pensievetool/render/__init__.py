@@ -2,6 +2,7 @@ import markdown
 import pathlib
 from ._wikilinks import PensieveLinkExtension
 from ._headings import HeadingExtension
+from ._urlify import URLifyExtension
 
 import textwrap
 
@@ -41,9 +42,9 @@ def render(path: pathlib.Path, template=None):
             "smarty",
             "toc",
             "nl2br",
-            "mdx_linkify",
             PensieveLinkExtension(),
             HeadingExtension(),
+            URLifyExtension()
         ],
     )
 

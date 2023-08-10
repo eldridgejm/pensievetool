@@ -48,7 +48,7 @@ class PensieveLinkExtension(Extension):
         self.md = md
 
         # append to end of inline patterns
-        WIKILINK_RE = r"\[\[([\w0-9_ \-():\./]+)\]\]"
+        WIKILINK_RE = r"\[\[([\w0-9_ \-(),\"'&:\./]+)\]\]"
         wikilinkPattern = PensieveLinksInlineProcessor(WIKILINK_RE, self.getConfigs())
         wikilinkPattern.md = md
         md.inlinePatterns.register(wikilinkPattern, "wikilink", 75)
