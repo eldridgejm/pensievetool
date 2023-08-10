@@ -46,10 +46,8 @@ def render(path: pathlib.Path, template=None):
         ],
     )
 
-    print(
-        template.format(
-            contents=md,
-            title=path.parent.name,
-            path=(path.parent.parent.name + "/" + path.parent.name),
-        )
+    return template.format(
+        contents=md,
+        title=path.parent.name,
+        path=(path.parent.parent.name + "/" + path.parent.name),
     )
