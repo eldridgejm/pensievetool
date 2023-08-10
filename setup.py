@@ -9,5 +9,5 @@ setup(
             "pensievetool = pensievetool.cli:main",
         ]
     },
-    install_requires=[ "markdown" ],
+    install_requires=[ 'markdown>=3.4' ],
 )
