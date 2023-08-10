@@ -20,7 +20,6 @@ License: [BSD](https://opensource.org/licenses/bsd-license.php)
 from markdown.extensions import Extension
 from markdown.inlinepatterns import InlineProcessor
 import xml.etree.ElementTree as etree
-import re
 
 from .. import parse
 
@@ -65,7 +64,7 @@ class PensieveLinksInlineProcessor(InlineProcessor):
             label = m.group(1).strip()
             url, html_class = build_link(label)
             a = etree.Element("a")
-            a.text = label
+            a.text = '[[ ' + label + ' ]]'
             a.set("href", url)
             if html_class:
                 a.set("class", html_class)
