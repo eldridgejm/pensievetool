@@ -29,10 +29,10 @@ def render(path: pathlib.Path, template=None):
     md = markdown.markdown(
         contents,
         extensions=[
-            "admonition",
             "codehilite",
             "def_list",
             "fenced_code",
+            "admonition",
             "footnotes",
             "smarty",
             "toc",
