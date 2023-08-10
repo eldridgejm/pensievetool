@@ -19,7 +19,7 @@
           python3Packages.buildPythonPackage rec {
             name = "pensievetool";
             src = ./.;
-            propagatedBuildInputs = with python3Packages; [markdown];
+            propagatedBuildInputs = with python3Packages; [markdown pygments];
             nativeBuildInputs = with python3Packages; [pytest];
             doCheck = false;
           }
