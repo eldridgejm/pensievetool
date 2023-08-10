@@ -67,11 +67,11 @@ class PensieveLinksInlineProcessor(InlineProcessor):
             span.set('class', html_class)
 
             openbr = etree.Element("span")
-            openbr.text = '[[ '
+            openbr.text = '[['
             openbr.set('class', 'wikilinkbracket')
 
             closebr = etree.Element("span")
-            closebr.text = ' ]]'
+            closebr.text = ']]'
             closebr.set('class', 'wikilinkbracket')
 
             a = etree.Element("a")
