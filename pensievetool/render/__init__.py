@@ -24,6 +24,9 @@ def render(path: pathlib.Path, template=None):
     if template is None:
         template = TEMPLATE
 
+    # make the path absolute
+    path = pathlib.Path(path).resolve()
+
     with path.open() as fileobj:
         contents = fileobj.read()
 
