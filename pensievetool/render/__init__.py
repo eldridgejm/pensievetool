@@ -41,6 +41,7 @@ def render(path: pathlib.Path, template=None):
             "smarty",
             "toc",
             "nl2br",
+            "mdx_linkify",
             PensieveLinkExtension(),
             HeadingExtension(),
         ],
