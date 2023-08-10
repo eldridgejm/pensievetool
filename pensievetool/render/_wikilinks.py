@@ -63,14 +63,29 @@ class PensieveLinksInlineProcessor(InlineProcessor):
         if m.group(1).strip():
             label = m.group(1).strip()
             url, html_class = build_link(label)
+            span = etree.Element("span")
+            span.set('class', html_class)
+
+            openbr = etree.Element("span")
+            openbr.text = '[[ '
+            openbr.set('class', 'wikilinkbracket')
+
+            closebr = etree.Element("span")
+            closebr.text = ' ]]'
+            closebr.set('class', 'wikilinkbracket')
+
             a = etree.Element("a")
-            a.text = '[[ ' + label + ' ]]'
+            a.text = label
             a.set("href", url)
             if html_class:
                 a.set("class", html_class)
+
+            span.append(openbr)
+            span.append(a)
+            span.append(closebr)
         else:
-            a = ""
-        return a, m.start(0), m.end(0)
+            span = ""
+        return span, m.start(0), m.end(0)
 
 
 def makeExtension(**kwargs):  # pragma: no cover
