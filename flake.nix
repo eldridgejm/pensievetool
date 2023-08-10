@@ -3,26 +3,31 @@
 
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;
 
-  outputs = { self, nixpkgs }:
-    let
-      supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
-    in
-      {
-        pensievetool = forAllSystems (system:
-          with import nixpkgs { system = "${system}"; allowBroken = true; };
-            python3Packages.buildPythonPackage rec {
-              name = "pensievetool";
-              src = ./.;
-              propagatedBuildInputs = with python3Packages; [ mistune ];
-              nativeBuildInputs = with python3Packages; [ pytest ];
-              doCheck = false;
-            }
-          );
+  outputs = {
+    self,
+    nixpkgs,
+  }: let
+    supportedSystems = ["x86_64-linux" "x86_64-darwin" "aarch64-darwin"];
+    forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
+  in rec {
+    pensievetool = forAllSystems (
+      system:
+        with import nixpkgs {
+          system = "${system}";
+          allowBroken = true;
+        };
+          python3Packages.buildPythonPackage rec {
+            name = "pensievetool";
+            src = ./.;
+            propagatedBuildInputs = with python3Packages; [mistune];
+            nativeBuildInputs = with python3Packages; [pytest];
+            doCheck = false;
+          }
+    );
 
-        defaultPackage = forAllSystems (system:
-            self.pensievetool.${system}
-          );
-      };
-
+    defaultPackage = forAllSystems (
+      system:
+        pensievetool.${system}
+    );
+  };
 }
