@@ -40,6 +40,7 @@ def render(path: pathlib.Path, template=None):
             "footnotes",
             "smarty",
             "toc",
+            "nl2br",
             PensieveLinkExtension(),
             HeadingExtension(),
         ],
