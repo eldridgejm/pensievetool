@@ -38,8 +38,14 @@ def render(path: pathlib.Path, template=None):
             "smarty",
             "toc",
             PensieveLinkExtension(),
-            HeadingExtension()
+            HeadingExtension(),
         ],
     )
 
-    print(template.format(contents=md, title=path.parent.name))
+    print(
+        template.format(
+            contents=md,
+            title=path.parent.name,
+            path=(path.parent.parent.name + "/" + path.parent.name),
+        )
+    )
