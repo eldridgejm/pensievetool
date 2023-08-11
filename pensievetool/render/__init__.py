@@ -1,6 +1,7 @@
 import markdown
 import pathlib
 from ._wikilinks import PensieveLinkExtension
+from ._headings import HeadingExtension
 
 import textwrap
 
@@ -23,12 +24,30 @@ def render(path: pathlib.Path, template=None):
     if template is None:
         template = TEMPLATE
 
+    # make the path absolute
+    path = pathlib.Path(path).resolve()
+
     with path.open() as fileobj:
         contents = fileobj.read()
 
     md = markdown.markdown(
         contents,
-        extensions=["toc", "smarty", PensieveLinkExtension()],
+        extensions=[
+            "codehilite",
+            "def_list",
+            "fenced_code",
+            "admonition",
+            "footnotes",
+            "smarty",
+            "toc",
+            "nl2br",
+            PensieveLinkExtension(),
+            HeadingExtension(),
+        ],
     )
 
-    print(template.format(contents=md, title=path.parent.name))
+    return template.format(
+        contents=md,
+        title=path.parent.name,
+        path=(path.parent.parent.name + "/" + path.parent.name),
+    )
